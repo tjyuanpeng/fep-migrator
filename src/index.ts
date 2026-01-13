@@ -9,15 +9,12 @@ import MagicString from 'magic-string'
 import ora from 'ora'
 import descriptorToString from 'vue-sfc-descriptor-to-string'
 
-const resolveFep = (content: string) => {
-  const ms = new MagicString(content)
-  const [imports] = parseEsm(content)
-
+const resolveFep = (code: string): [boolean, string] => {
+  const ms = new MagicString(code)
+  const [imports] = parseEsm(code)
   for (let i = imports.length - 1; i >= 0; i--) {
     const imp = imports[i]
     const originalPath = imp.n
-
-    // 跳过空路径、动态导入（可根据需求扩展动态导入处理）
     if (!originalPath || imp.d > -1 || imp.d === -2) {
       continue
     }
@@ -32,8 +29,8 @@ const resolveFep = (content: string) => {
       ms.overwrite(imp.s, imp.e, newPath)
     }
   }
-
-  return ms.toString()
+  const hasChanged = ms.hasChanged()
+  return [hasChanged, hasChanged ? ms.toString() : code]
 }
 
 const readVueFile = (filename: string) => {
@@ -78,15 +75,15 @@ const main = () => {
             const descriptor = readVueFile(file)
             let changed = false
             if (descriptor.script) {
-              const newScript = resolveFep(descriptor.script.content)
-              if (newScript !== descriptor.script.content) {
+              const [hasChanged, newScript] = resolveFep(descriptor.script.content)
+              if (hasChanged) {
                 changed = true
                 descriptor.script.content = newScript
               }
             }
             if (descriptor.scriptSetup) {
-              const newScriptSetup = resolveFep(descriptor.scriptSetup.content)
-              if (newScriptSetup !== descriptor.scriptSetup.content) {
+              const [hasChanged, newScriptSetup] = resolveFep(descriptor.scriptSetup.content)
+              if (hasChanged) {
                 changed = true
                 descriptor.scriptSetup.content = newScriptSetup
               }
@@ -97,8 +94,8 @@ const main = () => {
             }
           } else {
             const content = fs.readFileSync(file, { encoding: 'utf-8' })
-            const resolved = resolveFep(content)
-            if (resolved !== content) {
+            const [hasChanged, resolved] = resolveFep(content)
+            if (hasChanged) {
               fs.writeFileSync(file, resolved)
             }
           }
