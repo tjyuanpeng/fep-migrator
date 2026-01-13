@@ -12,20 +12,21 @@
     "migration"
   ],
   "bin": {
-    "fep-migrator": "./bin/cli.js"
+    "fep-migrator": "./src/cli.ts"
   },
   "scripts": {
-    "start": "node ./bin/cli.js"
+    "start": "node ./src/cli.ts"
   },
   "dependencies": {
     "@types/fs-extra": "^11.0.4",
     "@vue/compiler-sfc": "^3.5.26",
     "cac": "^6.7.14",
-    "es-module-lexer": "^2.0.0",
     "fs-extra": "^11.3.3",
     "globby": "^16.1.0",
+    "indent-string": "^5.0.0",
     "magic-string": "^0.30.21",
     "ora": "^9.0.0",
+    "oxc-parser": "^0.108.0",
     "typescript": "^5.9.3",
     "vue-sfc-descriptor-to-string": "^3.0.1"
   },

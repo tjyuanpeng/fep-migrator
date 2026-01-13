@@ -8,6 +8,7 @@ export default antfu({
     html: true,
     markdown: true,
   },
+  ignores: ['tests'],
 }).overrideRules({
   'no-console': 'off',
   'style/brace-style': ['error', '1tbs', { allowSingleLine: true }],

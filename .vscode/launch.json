@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Program",
+      "type": "node",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**",
+        "${workspaceFolder}/node_modules/**"
+      ],
+      "program": "${workspaceFolder}/src/cli.ts",
+      "args": [
+        "tests"
+      ],
+      "console": "integratedTerminal", // 输出到 VS Code 终端，便于看日志
+      "internalConsoleOptions": "neverOpen",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
