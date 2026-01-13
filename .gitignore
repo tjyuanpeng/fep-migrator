@@ -21,6 +21,3 @@ yarn-error.log*
 *.njsproj
 *.sln
 /version.json
-
-# turborepo
-.turbo

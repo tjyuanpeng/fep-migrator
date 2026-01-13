@@ -2,38 +2,44 @@
   "name": "fep-migrator",
   "type": "module",
   "version": "1.0.0",
-  "private": true,
   "packageManager": "pnpm@10.23.0",
   "description": "@falconix/fep migration helper",
   "author": "tjyuanpeng",
   "license": "MIT",
   "keywords": [
+    "falconix",
     "fep",
-    "migration"
+    "migration",
+    "element-plus",
+    "ast",
+    "oxc-parser",
+    "tsdown"
   ],
   "bin": {
-    "fep-migrator": "./src/cli.ts"
+    "fep-migrator": "./dist/index.mjs"
   },
   "scripts": {
-    "start": "tsx ./src/cli.ts"
+    "start": "node dist/index.mjs",
+    "watch": "tsdown --watch",
+    "build": "tsdown",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@types/fs-extra": "^11.0.4",
     "@vue/compiler-sfc": "^3.5.26",
     "cac": "^6.7.14",
     "fs-extra": "^11.3.3",
     "globby": "^16.1.0",
-    "indent-string": "^5.0.0",
     "magic-string": "^0.30.21",
-    "oxc-parser": "^0.108.0",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "vue-sfc-descriptor-to-string": "^3.0.1"
+    "oxc-parser": "^0.108.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.7.3",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^25.0.6",
     "eslint": "^9.39.2",
-    "eslint-plugin-format": "^1.2.0"
+    "eslint-plugin-format": "^1.2.0",
+    "tsdown": "0.20.0-beta.1",
+    "typescript": "^5.9.3"
   }
 }

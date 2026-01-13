@@ -1,5 +1,5 @@
 import { cac } from 'cac'
-import replaceFep from './replace-fep.ts'
+import replaceFep from './replace-fep'
 
 const cli = cac('fep-migrator')
 cli

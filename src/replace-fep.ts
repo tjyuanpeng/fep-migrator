@@ -1,11 +1,10 @@
 import path from 'node:path'
 import process from 'node:process'
-import { parse } from '@vue/compiler-sfc'
 import fs from 'fs-extra'
 import { globbySync } from 'globby'
 import MagicString from 'magic-string'
 import { parseSync } from 'oxc-parser'
-import descriptorToString from './vue-sfc-descriptor-to-string/index.js'
+import { modifySfcCodeByDescriptor, parseVueSfcFile } from './sfc'
 
 const resolveFep = (code: string, filename: string): [boolean, string] => {
   const ms = new MagicString(code)
@@ -32,17 +31,6 @@ const resolveFep = (code: string, filename: string): [boolean, string] => {
   return [hasChanged, hasChanged ? ms.toString() : code]
 }
 
-const getVueFileDescriptor = (filename: string) => {
-  const content = fs.readFileSync(filename, { encoding: 'utf-8' })
-  const { descriptor } = parse(content, {
-    filename,
-    sourceMap: false,
-  })
-  return descriptor
-}
-
-const getRelativePath = (target: string) => path.relative(process.cwd(), target)
-
 async function replacer(dirs: string[]) {
   const fileList = globbySync(dirs, {
     absolute: true,
@@ -61,7 +49,7 @@ async function replacer(dirs: string[]) {
   for (const file of fileList) {
     try {
       if (file.endsWith('.vue')) {
-        const descriptor = getVueFileDescriptor(file)
+        const [code, descriptor] = parseVueSfcFile(file)
         let changed = false
         if (descriptor.script) {
           const [hasChanged, newScript] = resolveFep(descriptor.script.content, file)
@@ -78,7 +66,7 @@ async function replacer(dirs: string[]) {
           }
         }
         if (changed) {
-          const resolved = descriptorToString(descriptor)
+          const [_changed, resolved] = modifySfcCodeByDescriptor(code, descriptor)
           fs.writeFileSync(file, resolved)
         }
       } else {
@@ -91,7 +79,7 @@ async function replacer(dirs: string[]) {
       statistic.success++
     } catch (e) {
       statistic.fail++
-      console.error(`❌ 处理错误: [${getRelativePath(file)}], error:${e}`)
+      console.error(`❌ 处理错误: [${path.relative(process.cwd(), file)}], error:${e}`)
       throw e
     }
   }

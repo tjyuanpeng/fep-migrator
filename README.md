@@ -1,76 +1,35 @@
-# fcl
+# fep-migrator
 
-falconix component library
+@falconix fep 迁移工具
 
-## package manager
-
-only use `pnpm` to manage packages
-
-## install dependencies
+## 安装
 
 ```shell
-pnpm i
+pnpm i fep-migrator -g
 ```
 
-## create tsdown project
+## 使用
 
 ```shell
-pnpm create tsdown@latest
+fep-migrator <...dir>
 ```
 
-## create vite project
+`dir` 为需要迁移的 fep 项目目录，支持多个目录同时迁移，例如：
 
 ```shell
-pnpm create vite@latest
+fep-migrator src1 src2
 ```
 
-## develop
+可以使用glob语法排除掉文件夹，例如：
 
 ```shell
-pnpm dev
+fep-migrator src "!**/public"
 ```
 
-## check code
+`fep-migrator` 会迁移两个包的内容：
 
-```shell
-pnpm lint
-pnpm typescheck
-```
+- element-plus => @falconix/fep
 
-## build
+- @element-plus/icons-vue => @falconix/icons-vue
 
-```shell
-pnpm build
-```
-
-## update version
-
-before publishing, you should run the following command to add changesets
-
-```shell
-pnpm changeset
-```
-
-after running the command, changeset will create a `.changeset/{UNIQUE_ID}.md` markdown file to determine how to update versions
-
-## publish
-
-[create a merge request](http://10.168.2.105:8888/soft_group/yingmai/fe_group/fcl/-/merge_requests/new)
-
-create a merge request merging into main branch in the gitlab
-
-then gitlab pipeline will publish repos to the private npm registry and push tags of published
-
-# play develop
-
-use a plain develop environment to debug your component
-
-```shell
-pnpm play
-```
-
-# document build
-
-```shell
-pnpm play:build
-```
+使用前请备份好文件，确保文件已经提交到git仓库
