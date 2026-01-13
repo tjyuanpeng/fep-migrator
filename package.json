@@ -18,10 +18,13 @@
   "bin": {
     "fep-migrator": "./dist/index.mjs"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "node dist/index.mjs",
-    "watch": "tsdown --watch",
-    "build": "tsdown",
+    "watch": "tsdown --watch --sourcemap",
+    "build": "tsdown --sourcemap",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },

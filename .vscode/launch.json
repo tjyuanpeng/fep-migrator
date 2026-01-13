@@ -9,7 +9,7 @@
         "<node_internals>/**",
         "${workspaceFolder}/node_modules/**"
       ],
-      "program": "${workspaceFolder}/src/cli.ts",
+      "program": "${workspaceFolder}/dist/index.mjs",
       "args": [
         "tests"
       ],
