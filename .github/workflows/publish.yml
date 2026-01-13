@@ -3,13 +3,7 @@ name: Build and Publish to npm
 on:
   push:
     tags:
-      - 'v*' # 匹配 v1.0.0、v2.1.3 等标签
-    branches:
-      - main
-    paths:
-      - package.json
-      - 'src/**'
-      - .github/workflows/publish.yml
+      - 'v*'
 
 permissions:
   contents: read
