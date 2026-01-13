@@ -1,7 +1,7 @@
 {
   "name": "fep-migrator",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "packageManager": "pnpm@10.23.0",
   "description": "@falconix/fep migration helper",
   "author": "tjyuanpeng <tjyuanpeng@gmail.com>",
@@ -42,6 +42,7 @@
   "dependencies": {
     "@vue/compiler-sfc": "^3.5.26",
     "cac": "^6.7.14",
+    "fep-migrator": "^1.0.0",
     "fs-extra": "^11.3.3",
     "globby": "^16.1.0",
     "magic-string": "^0.30.21",

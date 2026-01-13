@@ -2,16 +2,10 @@
 
 @falconix fep 迁移工具
 
-## 安装
-
-```shell
-pnpm i fep-migrator -g
-```
-
 ## 使用
 
 ```shell
-fep-migrator <...dir>
+npx fep-migrator <...dir>
 ```
 
 `dir` 为需要迁移的 fep 项目目录，支持多个目录同时迁移，例如：
@@ -25,6 +19,8 @@ fep-migrator src1 src2
 ```shell
 fep-migrator src "!**/public"
 ```
+
+## 注意事项
 
 `fep-migrator` 会迁移两个包的内容：
 

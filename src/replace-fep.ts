@@ -46,6 +46,7 @@ async function replacer(dirs: string[]) {
     fail: 0,
     total: fileList.length,
   }
+  console.log('# 开始处理...')
   for (const file of fileList) {
     try {
       if (file.endsWith('.vue')) {
@@ -68,22 +69,22 @@ async function replacer(dirs: string[]) {
         if (changed) {
           const [_changed, resolved] = modifySfcCodeByDescriptor(code, descriptor)
           fs.writeFileSync(file, resolved)
+          statistic.success++
         }
       } else {
         const content = fs.readFileSync(file, { encoding: 'utf-8' })
         const [hasChanged, resolved] = resolveFep(content, file)
         if (hasChanged) {
           fs.writeFileSync(file, resolved)
+          statistic.success++
         }
       }
-      statistic.success++
     } catch (e) {
-      statistic.fail++
       console.error(`❌ 处理错误: [${path.relative(process.cwd(), file)}], error:${e}`)
-      throw e
+      statistic.fail++
     }
   }
-  return statistic
+  console.log(`# 处理完成。共扫描 ${statistic.total} 个文件，修改成功 ${statistic.success} 个，修改失败 ${statistic.fail} 个`)
 }
 
 export default replacer
