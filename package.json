@@ -4,8 +4,16 @@
   "version": "1.0.0",
   "packageManager": "pnpm@10.23.0",
   "description": "@falconix/fep migration helper",
-  "author": "tjyuanpeng",
+  "author": "tjyuanpeng <tjyuanpeng@gmail.com>",
   "license": "MIT",
+  "homepage": "https://github.com/tjyuanpeng/fep-migrator",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjyuanpeng/fep-migrator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tjyuanpeng/fep-migrator/issues"
+  },
   "keywords": [
     "falconix",
     "fep",
