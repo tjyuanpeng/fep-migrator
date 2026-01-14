@@ -32,11 +32,14 @@ const clearAll = async () => {
 <style scoped>
 .notification-dialog-content {
   height: 40vh;
+  font-family: inherit;
+}
 
 .clear-btn {
   margin: -4px;
   padding: 0 4px;
   margin-left: 4px;
   transform: rotate(180deg);
+  font-family: 'Courier New', Courier, monospace;
 }
 </style>

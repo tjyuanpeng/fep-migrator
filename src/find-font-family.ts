@@ -34,7 +34,7 @@ const finder = async (dirs: string[]) => {
   }
   const list = stdout.split('\n').map(line => JSON.parse(line))
   list.filter(i => i.type === 'summary').forEach((i) => {
-    console.log(`⚠️  发现 ${i.data.stats.matches} 个文件，在css中设置了'font-family', 如无必要请不要覆盖项目字体设置，及时修改。`)
+    console.log(`⚠️  发现 ${i.data.stats.searches_with_match} 个文件，在css中设置了'font-family'。如无必要请不要覆盖项目的字体设置，请及时修改。`)
   })
   list.filter(i => i.type === 'match').forEach((i) => {
     console.log(`➡️  ${i.data.path.text}:${i.data.line_number}`)

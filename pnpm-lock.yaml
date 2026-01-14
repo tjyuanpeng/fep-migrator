@@ -30,8 +30,8 @@ importers:
         specifier: ^0.108.0
         version: 0.108.0
       vue-sfc-descriptor-write-back:
-        specifier: ^1.0.0
-        version: 1.0.0
+        specifier: ^1.0.1
+        version: 1.0.1
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^6.7.3
@@ -1848,8 +1848,8 @@ packages:
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
 
-  vue-sfc-descriptor-write-back@1.0.0:
-    resolution: {integrity: sha512-a+6YYKmCOPmpPpbi1Ek63v+aM3zilVKDnktFJ4dKVpd/C27042d3vPEh3etApobuEermagZMRab5kB6UA9I3gg==}
+  vue-sfc-descriptor-write-back@1.0.1:
+    resolution: {integrity: sha512-dQm/vCDLW/8mdRThpn87Bv06nnL2nlBFzmFiphLL3e4ppOmZ5WfiYDLH2fwqbQ0s1LTQtJoirltXicJTPdMS1Q==}
 
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
@@ -3827,7 +3827,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-sfc-descriptor-write-back@1.0.0:
+  vue-sfc-descriptor-write-back@1.0.1:
     dependencies:
       '@vue/compiler-sfc': 3.5.26
       magic-string: 0.30.21
