@@ -46,7 +46,7 @@ async function replacer(dirs: string[]) {
     fail: 0,
     total: fileList.length,
   }
-  console.log('# 开始处理...')
+  console.log('🚀 开始迁移...')
   for (const file of fileList) {
     try {
       if (file.endsWith('.vue')) {
@@ -84,7 +84,7 @@ async function replacer(dirs: string[]) {
       statistic.fail++
     }
   }
-  console.log(`# 处理完成。共扫描 ${statistic.total} 个文件，修改成功 ${statistic.success} 个，修改失败 ${statistic.fail} 个`)
+  console.log(`🏁 迁移完成。共扫描 ${statistic.total} 个文件，修改成功 ${statistic.success} 个，修改失败 ${statistic.fail} 个`)
 }
 
 export default replacer
