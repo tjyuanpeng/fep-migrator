@@ -1,7 +1,7 @@
 {
   "name": "fep-migrator",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "packageManager": "pnpm@10.23.0",
   "description": "@falconix/fep migration helper",
   "author": "tjyuanpeng <tjyuanpeng@gmail.com>",
@@ -34,22 +34,21 @@
   },
   "scripts": {
     "start": "node dist/index.mjs",
-    "watch": "tsdown --watch --sourcemap",
-    "build": "tsdown --sourcemap",
+    "watch": "tsdown --watch",
+    "build": "tsdown",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@vue/compiler-sfc": "^3.5.26",
     "cac": "^6.7.14",
-    "fs-extra": "^11.3.3",
     "globby": "^16.1.0",
     "magic-string": "^0.30.21",
-    "oxc-parser": "^0.108.0"
+    "oxc-parser": "^0.108.0",
+    "vue-sfc-descriptor-write-back": "^1.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.7.3",
-    "@types/fs-extra": "^11.0.4",
     "@types/node": "^25.0.6",
     "eslint": "^9.39.2",
     "eslint-plugin-format": "^1.2.0",

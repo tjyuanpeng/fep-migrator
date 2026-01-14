@@ -1,10 +1,10 @@
+import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-import fs from 'fs-extra'
 import { globbySync } from 'globby'
 import MagicString from 'magic-string'
 import { parseSync } from 'oxc-parser'
-import { modifySfcCodeByDescriptor, parseVueSfcFile } from './sfc'
+import { parse, writeBack } from 'vue-sfc-descriptor-write-back'
 
 const resolveFep = (code: string, filename: string): [boolean, string] => {
   const ms = new MagicString(code)
@@ -50,7 +50,7 @@ async function replacer(dirs: string[]) {
   for (const file of fileList) {
     try {
       if (file.endsWith('.vue')) {
-        const [code, descriptor] = parseVueSfcFile(file)
+        const { code, descriptor } = parse(file)
         let changed = false
         if (descriptor.script) {
           const [hasChanged, newScript] = resolveFep(descriptor.script.content, file)
@@ -67,7 +67,7 @@ async function replacer(dirs: string[]) {
           }
         }
         if (changed) {
-          const [_changed, resolved] = modifySfcCodeByDescriptor(code, descriptor)
+          const { code: resolved } = writeBack(code, descriptor)
           fs.writeFileSync(file, resolved)
           statistic.success++
         }
