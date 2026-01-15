@@ -4,23 +4,25 @@
 
 ## 使用
 
-```shell
-npx fep-migrator <...dir>
-```
-
-`dir` 为需要迁移的 fep 项目目录
-
-支持多个目录同时迁移，例如：
+在项目根目录执行命令
 
 ```shell
-fep-migrator web mobile
+npx fep-migrator
 ```
 
-可以使用glob语法排除掉文件夹，例如：
+## 选项
 
-```shell
-fep-migrator . "!**/public"
-```
+- `--pkg-manager` 或 `-p` 指定包管理器，默认值为 `pnpm`
+
+- `--exclude` 或 `-e` 排除指定目录
+
+  使用glob语法，支持设置多个目录，例如：
+
+  ```shell
+  fep-migrator --exclude "**/public" --exclude "**/assets"
+  ```
+
+- `--dry-run` 或 `-d` 模拟运行，不实际修改文件
 
 ## 注意事项
 
