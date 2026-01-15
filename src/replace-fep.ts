@@ -1,6 +1,5 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import process from 'node:process'
 import { globbySync } from 'globby'
 import MagicString from 'magic-string'
 import { parseSync } from 'oxc-parser'
@@ -31,8 +30,8 @@ const resolveFep = (code: string, filename: string): [boolean, string] => {
   return [hasChanged, hasChanged ? ms.toString() : code]
 }
 
-async function replacer(dirs: string[]) {
-  const fileList = globbySync(dirs, {
+async function replacer(options: Options) {
+  const fileList = globbySync([options.root, ...options.exclude.map(i => `!${i}`)], {
     absolute: true,
     onlyFiles: true,
     gitignore: true,
@@ -68,19 +67,21 @@ async function replacer(dirs: string[]) {
         }
         if (changed) {
           const { code: resolved } = writeBack(code, descriptor)
-          fs.writeFileSync(file, resolved)
+          !options.dryRun && fs.writeFileSync(file, resolved)
+          console.error(`✅ 处理完成: [${path.relative(options.root, file)}]`)
           statistic.success++
         }
       } else {
         const content = fs.readFileSync(file, { encoding: 'utf-8' })
         const [hasChanged, resolved] = resolveFep(content, file)
         if (hasChanged) {
-          fs.writeFileSync(file, resolved)
+          !options.dryRun && fs.writeFileSync(file, resolved)
+          console.error(`✅ 处理完成: [${path.relative(options.root, file)}]`)
           statistic.success++
         }
       }
     } catch (e) {
-      console.error(`❌ 处理错误: [${path.relative(process.cwd(), file)}], error:${e}`)
+      console.error(`❌ 处理错误: [${path.relative(options.root, file)}], error:${e}`)
       statistic.fail++
     }
   }
