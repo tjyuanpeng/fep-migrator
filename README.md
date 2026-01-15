@@ -33,3 +33,5 @@ fep-migrator . "!**/public"
 - @element-plus/icons-vue => @falconix/icons-vue
 
 `fep-migrator` 会检测文件中是否含有 `font-family:` 如果有，会提示用户修改
+
+`fep-migrator` 会检测文件中是否含有 `.el-message-box` 如果有，会提示用户修改
